@@ -42,12 +42,12 @@
 </head>
 <body>
     <div>
-        <form action="~/UI/MH_MATHANG.cshtml" method="post">
+        <form action="~/UI/MATHANG/MH_MATHANG.cshtml" method="post">
             <br />
 
             <input type="text" name="keyword" value="Ten Hang" />
             <input type="submit" value="TimKiem" /> <br />
-            <a href="~/UI/MH_THEM_MATHANG .cshtml">Them Mat Hang</a>
+            <a href="~/UI/MATHANG/MH_THEM_MATHANG .cshtml">Them Mat Hang</a>
             @if (ListMatHang != null)
             {
 
@@ -74,8 +74,8 @@
                             <th>@ListMatHang[i].NamSanxuat</th>
                             <th>@ListMatHang[i].LoaiHang</th>
                             <th>
-                                <a href="~/UI/MH_XOA_MATHANG.cshtml?maMatHang=@ListMatHang[i].MaMatHang">Xoa Mat Hang</a>
-                                <a href="~/UI/MH_SUA_MATHANG.cshtml?maMatHang=@ListMatHang[i].MaMatHang">Sua Mat Hang</a>
+                                <a href="~/UI/MATHANG/MH_XOA_MATHANG.cshtml?maMatHang=@ListMatHang[i].MaMatHang">Xoa Mat Hang</a>
+                                <a href="~/UI/MATHANG/MH_SUA_MATHANG.cshtml?maMatHang=@ListMatHang[i].MaMatHang">Sua Mat Hang</a>
                             </th>
                         </tr>
                     }

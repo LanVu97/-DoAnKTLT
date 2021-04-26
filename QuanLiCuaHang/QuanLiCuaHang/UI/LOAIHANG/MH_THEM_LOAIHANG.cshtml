@@ -1,0 +1,59 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    String keyword = string.Empty;
+
+    LOAI_HANG loaiHang;
+    if (IsPost)
+    {
+        loaiHang.MaLoaiHang = String.Empty;
+        loaiHang.TenLoaiHang = Request["tenLH"];
+        
+        XL_LOAI_HANG.ThemLoaiHang(loaiHang);
+
+        Response.Redirect("~/UI/LOAIHANG/MH_LOAIHANG.cshtml");
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/LOAIHANG/MH_THEM_LOAIHANG.cshtml" method="post">
+                    
+                <label for="lname">Ten Loai Hang:</label><br>
+                <input type="text" id="lname" name="tenLH" ><br><br>
+                
+                <input type="submit" value="Them Loai Hang">
+         </form> 
+    </div>
+    </body>
+</html>
+
+            
+            
+            

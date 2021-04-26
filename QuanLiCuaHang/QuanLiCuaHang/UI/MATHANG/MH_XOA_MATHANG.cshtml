@@ -19,13 +19,15 @@
         }
         else
         {
-            if (IsPost)
             {
+                if (IsPost)
+                {
 
-                XL_MATHANG.XoaMatHang(maMatHang);
-                Response.Redirect("~/UI/MH_MATHANG.cshtml");
+                    XL_MATHANG.XoaMatHang(maMatHang);
+                    Response.Redirect("~/UI/MATHANG/MH_MATHANG.cshtml");
+                }
+
             }
-
         }
     }
 }
@@ -55,7 +57,7 @@
 </head>
 <body>
     <div>
-        <form action="~/UI/MH_XOA_MATHANG.cshtml?maMatHang=@maMatHang" method="post">
+        <form action="~/UI/MATHANG/MH_XOA_MATHANG.cshtml?maMatHang=@maMatHang" method="post">
             Bạn có chắc chắn muốn xóa mặt hàng này ?    
                <input type="submit" value="Đồng Ý">
          </form> 

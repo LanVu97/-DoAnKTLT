@@ -17,6 +17,3 @@ E:\course\KTLT_MODEL\QuanLiCuaHang\QuanLiCuaHang\bin\System.Web.WebPages.Razor.x
 E:\course\KTLT_MODEL\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.csprojResolveAssemblyReference.cache
 E:\course\KTLT_MODEL\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.dll
 E:\course\KTLT_MODEL\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.pdb
-E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.csprojResolveAssemblyReference.cache
-E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.dll
-E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.pdb

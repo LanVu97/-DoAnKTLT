@@ -1,0 +1,74 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    String Chuoi = string.Empty;
+    String maLoaiHang = Request["maLoaiHang"];
+    LOAI_HANG LoaiHang = new LOAI_HANG();
+    if (string.IsNullOrEmpty(maLoaiHang))
+    {
+        Chuoi = "Ma loai hang nay khong ton tai";
+    }else
+    {
+        LoaiHang = XL_LOAI_HANG.TimKiemLoaiHang_MaLH(maLoaiHang);
+        if (string.IsNullOrEmpty(LoaiHang.MaLoaiHang))
+        {
+            Chuoi = "Khong co loai hang nao co ma nay";
+        }else
+        {
+            if (IsPost)
+            {
+                LoaiHang.MaLoaiHang = maLoaiHang;
+                LoaiHang.TenLoaiHang = Request["tenLH"];
+
+                XL_LOAI_HANG.SuaLoaiHang(LoaiHang);
+
+                Response.Redirect("~/UI/LOAIHANG/MH_LOAIHANG.cshtml");
+            }
+        }
+
+    }
+
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Loai Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/LOAIHANG/MH_SUA_LOAIHANG.cshtml?maLoaiHang=@maLoaiHang" method="post">
+            
+               
+                <label for="lname">Ten Loai Hang:</label><br>
+                <input type="text" id="lname" name="tenLH" value="@LoaiHang.TenLoaiHang"><br><br>
+                
+                <input type="submit" value="Sua Loai Hang">
+         </form> 
+    </div>
+    </body>
+</html>
+
+           

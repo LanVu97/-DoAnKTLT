@@ -1,0 +1,89 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    String keyword = string.Empty;
+
+
+    List<LOAI_HANG> ListLoaiHang = null;
+    if (IsPost)
+    {
+        keyword = Request["keyword"];
+
+
+    }
+    ListLoaiHang = XL_LOAI_HANG.TimKiemLoaiHang(keyword);
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/LOAIHANG/MH_LOAIHANG.cshtml" method="post">
+            <br />
+
+            <input type="text" name="keyword" value="Loai Hang" />
+            <input type="submit" value="TimKiem" /> <br />
+            <a href="~/UI/LOAIHANG/MH_THEM_LOAIHANG.cshtml">Them Loai Hang</a>
+            @if (ListLoaiHang != null)
+            { 
+                <table>
+                    <tr>
+                        <th>Ma Mat Hang</th>
+                        <th>Ten Loai Hang</th>
+                        <th></th>
+                    </tr>
+
+                    @for (int i = 0; i < ListLoaiHang.Count(); i++)
+                {
+
+                        <tr>
+                            <th>@ListLoaiHang[i].MaLoaiHang</th>
+                            <th>@ListLoaiHang[i].TenLoaiHang</th>
+                            
+                            <th>
+                                <a href="~/UI/LOAIHANG/MH_XOA_LOAIHANG.cshtml?maLoaiHang=@ListLoaiHang[i].MaLoaiHang">Xoa Loai Hang</a>
+                                <a href="~/UI/LOAIHANG/MH_SUA_LOAIHANG.cshtml?maLoaiHang=@ListLoaiHang[i].MaLoaiHang">Sua Loai Hang</a>
+                            </th>
+                        </tr>
+                    }
+
+                </table>
+
+
+            }
+            else
+            {
+                <p>Chưa có loại hàng nào</p>
+            }
+
+        </form>
+    </div>
+</body>
+</html>
+
+            
+            

@@ -99,12 +99,15 @@
   </ItemGroup>
   <ItemGroup>
     <Content Include="packages.config" />
-    <Content Include="UI\MH_MATHANG.cshtml" />
-    <Content Include="UI\MH_THEM_MATHANG .cshtml" />
-    <Content Include="UI\MH_XOA_MATHANG.cshtml" />
-    <Content Include="UI\MH_SUA_MATHANG.cshtml" />
+    <Content Include="UI\MATHANG\MH_MATHANG.cshtml" />
+    <Content Include="UI\MATHANG\MH_THEM_MATHANG .cshtml" />
+    <Content Include="UI\MATHANG\MH_XOA_MATHANG.cshtml" />
+    <Content Include="UI\MATHANG\MH_SUA_MATHANG.cshtml" />
     <Content Include="UI\MH_HOMEPAGE.cshtml" />
-    <Content Include="UI\MH_LOAIHANG.cshtml" />
+    <Content Include="UI\LOAIHANG\MH_LOAIHANG.cshtml" />
+    <Content Include="UI\LOAIHANG\MH_THEM_LOAIHANG.cshtml" />
+    <Content Include="UI\LOAIHANG\MH_XOA_LOAIHANG.cshtml" />
+    <Content Include="UI\LOAIHANG\MH_SUA_LOAIHANG.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

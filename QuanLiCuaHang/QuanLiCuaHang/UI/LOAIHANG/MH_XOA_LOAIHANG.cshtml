@@ -1,0 +1,66 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+
+    String Chuoi = string.Empty;
+    String maLoaiHang = Request["maLoaiHang"];
+    LOAI_HANG LoaiHang = new LOAI_HANG();
+    if (string.IsNullOrEmpty(maLoaiHang))
+    {
+        Chuoi = "Ma loai hang nay khong ton tai";
+    }
+    else
+    {
+        LoaiHang = XL_LOAI_HANG.TimKiemLoaiHang_MaLH(maLoaiHang);
+        if (string.IsNullOrEmpty(LoaiHang.MaLoaiHang))
+        {
+            Chuoi = "Khong co loai hang nao co ma nay";
+        }
+        else
+        {
+            if (IsPost)
+            {
+
+                XL_LOAI_HANG.XoaLoaiHang(maLoaiHang);
+                Response.Redirect("~/UI/LOAIHANG/MH_LOAIHANG.cshtml");
+            }
+
+        }
+    }
+}
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/LOAIHANG/MH_XOA_LOAIHANG.cshtml?maLoaiHang=@maLoaiHang" method="post">
+            Bạn có chắc chắn muốn xóa loại hàng này ?    
+               <input type="submit" value="Đồng Ý">
+         </form> 
+    </div>
+    </body>
+</html>
+
+          
