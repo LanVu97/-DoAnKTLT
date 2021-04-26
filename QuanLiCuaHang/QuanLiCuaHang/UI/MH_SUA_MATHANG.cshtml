@@ -1,0 +1,84 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    String Chuoi = string.Empty;
+    String maMatHang = Request["maMatHang"];
+    MATHANG matHang = new MATHANG();
+    if (string.IsNullOrEmpty(maMatHang))
+    {
+        Chuoi = "Ma mat hang nay khong ton tai";
+    }else
+    {
+        matHang = XL_MATHANG.TimKiemMatHang_MaMH(maMatHang);
+        if (string.IsNullOrEmpty(matHang.MaMatHang))
+        {
+            Chuoi = "Khong co mat hang nao co ma nay";
+        }else
+        {
+            if (IsPost)
+            {
+                matHang.MaMatHang = maMatHang;
+                matHang.TenHang = Request["tenMH"];
+                matHang.HanDung = Request["hanDung"];
+                matHang.CongTySanXuat = Request["congTySanXuat"];
+                matHang.NamSanxuat = int.Parse(Request["namSX"]);
+                matHang.LoaiHang = Request["LoaiHang"];
+                XL_MATHANG.SuaMatHang(matHang);
+
+                Response.Redirect("~/UI/MH_MATHANG.cshtml");
+            }
+        }
+
+    }
+
+
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/MH_SUA_MATHANG.cshtml?maMatHang=@maMatHang" method="post">
+            
+               
+                <label for="lname">Ten Hang:</label><br>
+                <input type="text" id="lname" name="tenMH" value="@matHang.TenHang"><br><br>
+                <label for="fname">Han Dung:</label><br>
+                <input type="text" id="fname" name="hanDung" value="@matHang.HanDung"><br>
+                <label for="lname">Cong Ty San Xuat:</label><br>
+                <input type="text" id="lname" name="congTySanXuat" value="@matHang.CongTySanXuat"><br><br>
+                <label for="fname">Nam San Xuat:</label><br>
+                <input type="text" id="fname" name="namSX" value="@matHang.NamSanxuat"><br>
+                <label for="lname">Loai Hang:</label><br>
+                <input type="text" id="lname" name="LoaiHang" value="@matHang.LoaiHang"><br><br>
+                <input type="submit" value="Sua Mat Hang">
+         </form> 
+    </div>
+    </body>
+</html>
+
+           

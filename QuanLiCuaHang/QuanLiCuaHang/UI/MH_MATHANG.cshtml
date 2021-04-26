@@ -1,0 +1,98 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    String keyword = string.Empty;
+
+    // List<MATHANG> ListMatHang = new List<MATHANG>();
+    List<MATHANG> ListMatHang = null;
+    if (IsPost)
+    {
+        keyword = Request["keyword"];
+        //ListMatHang = XL_MATHANG.DocMatHang();
+
+    }
+    ListMatHang = XL_MATHANG.TimKiemMatHang(keyword);
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/MH_MATHANG.cshtml" method="post">
+            <br />
+
+            <input type="text" name="keyword" value="Ten Hang" />
+            <input type="submit" value="TimKiem" /> <br />
+            <a href="~/UI/MH_THEM_MATHANG .cshtml">Them Mat Hang</a>
+            @if (ListMatHang != null)
+            {
+
+
+                <table>
+                    <tr>
+                        <th>Ma Mat Hang</th>
+                        <th>Ten Hang</th>
+                        <th>Han Dung</th>
+                        <th>Cong Ty San Xuat</th>
+                        <th>Nam San Xuat</th>
+                        <th>Loai Hang</th>
+                        <th></th>
+                    </tr>
+
+                    @for (int i = 0; i < ListMatHang.Count(); i++)
+                {
+
+                        <tr>
+                            <th>@ListMatHang[i].MaMatHang</th>
+                            <th>@ListMatHang[i].TenHang</th>
+                            <th>@ListMatHang[i].HanDung</th>
+                            <th>@ListMatHang[i].CongTySanXuat</th>
+                            <th>@ListMatHang[i].NamSanxuat</th>
+                            <th>@ListMatHang[i].LoaiHang</th>
+                            <th>
+                                <a href="~/UI/MH_XOA_MATHANG.cshtml?maMatHang=@ListMatHang[i].MaMatHang">Xoa Mat Hang</a>
+                                <a href="~/UI/MH_SUA_MATHANG.cshtml?maMatHang=@ListMatHang[i].MaMatHang">Sua Mat Hang</a>
+                            </th>
+                        </tr>
+                    }
+
+                </table>
+
+
+            }
+            else
+            {
+                <p>Chưa có sản phẩm </p>
+            }
+
+        </form>
+    </div>
+</body>
+</html>
+
+            
+            
