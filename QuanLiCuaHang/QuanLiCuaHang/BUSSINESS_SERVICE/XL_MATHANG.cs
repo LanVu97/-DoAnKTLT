@@ -61,5 +61,11 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
         {
             LT_MATHANG.SuaMatHang(matHang);
         }
+
+        public static void SuaLoaiHangCuaMatHang(String TenLoaiHangCu, String TenLoaiHangMoi)
+        {
+            LT_MATHANG.SuaLoaiHangCuaMatHang(TenLoaiHangCu, TenLoaiHangMoi);
+        }
+
     }
 }

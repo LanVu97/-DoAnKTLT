@@ -18,10 +18,12 @@
         {
             if (IsPost)
             {
+                String tenLHCu = LoaiHang.TenLoaiHang;
                 LoaiHang.MaLoaiHang = maLoaiHang;
                 LoaiHang.TenLoaiHang = Request["tenLH"];
 
                 XL_LOAI_HANG.SuaLoaiHang(LoaiHang);
+                XL_MATHANG.SuaLoaiHangCuaMatHang(tenLHCu , LoaiHang.TenLoaiHang);
 
                 Response.Redirect("~/UI/LOAIHANG/MH_LOAIHANG.cshtml");
             }
@@ -61,11 +63,11 @@
     <div>
         <form action="~/UI/LOAIHANG/MH_SUA_LOAIHANG.cshtml?maLoaiHang=@maLoaiHang" method="post">
             
-               
+               <p>Sự thay đổi sẽ làm thay đổi loại hàng của các mặt hàng tương ứng. Bạn chắc chắn muốn sửa ? </p>
                 <label for="lname">Ten Loai Hang:</label><br>
                 <input type="text" id="lname" name="tenLH" value="@LoaiHang.TenLoaiHang"><br><br>
                 
-                <input type="submit" value="Sua Loai Hang">
+                <input type="submit" value="Sửa Ngay">
          </form> 
     </div>
     </body>

@@ -100,5 +100,24 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
             
             LuuDanhSachMatHang(listMatHang);
         }
+
+        public static void SuaLoaiHangCuaMatHang(String TenLoaiHangCu, String TenLoaiHangMoi)
+        {
+            List<MATHANG> listMatHang = DocMatHang();
+            for (int i = 0; i < listMatHang.Count(); i++)
+            {
+                if (listMatHang[i].LoaiHang == TenLoaiHangCu)
+                {
+                    MATHANG matHang = listMatHang[i];
+                    matHang.LoaiHang = TenLoaiHangMoi;
+                    
+                    listMatHang[i] = matHang;
+                    
+                }
+            }
+
+            LuuDanhSachMatHang(listMatHang);
+        }
+
     }
 }

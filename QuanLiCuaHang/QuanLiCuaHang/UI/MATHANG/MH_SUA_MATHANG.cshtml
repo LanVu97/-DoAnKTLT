@@ -4,6 +4,7 @@
     Layout = null;
     String Chuoi = string.Empty;
     String maMatHang = Request["maMatHang"];
+    List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
     MATHANG matHang = new MATHANG();
     if (string.IsNullOrEmpty(maMatHang))
     {
@@ -74,7 +75,16 @@
                 <label for="fname">Nam San Xuat:</label><br>
                 <input type="text" id="fname" name="namSX" value="@matHang.NamSanxuat"><br>
                 <label for="lname">Loai Hang:</label><br>
-                <input type="text" id="lname" name="LoaiHang" value="@matHang.LoaiHang"><br><br>
+                
+                    <select name="LoaiHang">
+                        @for (int i = 0; i < LoaiHang.Count(); i++)
+                        {
+                            <option value="@LoaiHang[i].TenLoaiHang">@LoaiHang[i].TenLoaiHang</option>
+                        }
+
+                    </select>
+
+            <br><br>
                 <input type="submit" value="Sua Mat Hang">
          </form> 
     </div>
