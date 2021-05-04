@@ -17,7 +17,7 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
         {
             
             List<MATHANG> listMatHang = LT_MATHANG.DocMatHang();
-            if(listMatHang.Count() == 0)
+            if(listMatHang == null)
             {
                 return null;
             }

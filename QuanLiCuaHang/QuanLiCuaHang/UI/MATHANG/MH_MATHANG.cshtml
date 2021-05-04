@@ -3,14 +3,12 @@
 @{
     Layout = null;
     String keyword = string.Empty;
-
-    // List<MATHANG> ListMatHang = new List<MATHANG>();
+    
     List<MATHANG> ListMatHang = null;
     if (IsPost)
     {
         keyword = Request["keyword"];
-        //ListMatHang = XL_MATHANG.DocMatHang();
-
+   
     }
     ListMatHang = XL_MATHANG.TimKiemMatHang(keyword);
 
@@ -47,11 +45,10 @@
 
             <input type="text" name="keyword" value="Ten Hang" />
             <input type="submit" value="TimKiem" /> <br />
-            <a href="~/UI/MATHANG/MH_THEM_MATHANG .cshtml">Them Mat Hang</a>
-            @if (ListMatHang != null)
+            <a href="~/UI/MATHANG/MH_THEM_MATHANG.cshtml">Them Mat Hang</a>
+            @if (ListMatHang.Count() != 0)
             {
-
-
+            
                 <table>
                     <tr>
                         <th>Ma Mat Hang</th>

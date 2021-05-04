@@ -36,3 +36,5 @@ E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\bin\System.Web.WebPages.Razor.xml
 E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.csprojResolveAssemblyReference.cache
 E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.dll
 E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\obj\Debug\QuanLiCuaHang.pdb
+E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\bin\Newtonsoft.Json.dll
+E:\quanLiBanHang\QuanLiCuaHang\QuanLiCuaHang\bin\Newtonsoft.Json.xml

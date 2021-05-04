@@ -19,12 +19,22 @@
         }
         else
         {
-            if (IsPost)
+            string tenLoaiHang = LoaiHang.TenLoaiHang;
+            bool flag = XL_LOAI_HANG.LoaiHangChuaDung(tenLoaiHang);
+            if (flag)
             {
+                if (IsPost)
+                {
 
-                XL_LOAI_HANG.XoaLoaiHang(maLoaiHang);
-                Response.Redirect("~/UI/LOAIHANG/MH_LOAIHANG.cshtml");
+                    XL_LOAI_HANG.XoaLoaiHang(maLoaiHang);
+                    Response.Redirect("~/UI/LOAIHANG/MH_LOAIHANG.cshtml");
+                }
             }
+            else
+            {
+                Chuoi = "Khong the xoa, vi co mat hang dang su dung loai hang nay";
+            }
+
 
         }
     }
@@ -56,10 +66,12 @@
 <body>
     <div>
         <form action="~/UI/LOAIHANG/MH_XOA_LOAIHANG.cshtml?maLoaiHang=@maLoaiHang" method="post">
-            Bạn có chắc chắn muốn xóa loại hàng này ?    
+            <p>Bạn có chắc chắn muốn xóa loại hàng này ?</p>
+            <br>
                <input type="submit" value="Đồng Ý">
          </form> 
     </div>
+    @Chuoi
     </body>
 </html>
 

@@ -4,35 +4,49 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using QuanLiCuaHang.ENTITIES;
+using Newtonsoft.Json;
+
 namespace QuanLiCuaHang.DATA_ACCESS_LAYER
 {
     public class LT_MATHANG
     {
         public static List<MATHANG> DocMatHang()
         {
-            StreamReader reader = new StreamReader("E:\\mathang.txt");
+
+            string filePath = @"E:\mathang.json";
             List<MATHANG> listMatHang = new List<MATHANG>();
-            String test = reader.ReadLine();
-            int n;
-            if (string.IsNullOrEmpty(test))
+            // Kiểm tra đường dẫn này có tồn tại hay không?
+            if (!File.Exists(filePath) )
             {
-                n = 0;
-            }else
-            {
-               // String a = reader.ReadLine();
-                n = int.Parse(test);
-            }
-
-            MATHANG MatHang;
-            for (int i = 0; i < n; i++)
-            {
-                String chuoiMatHang = reader.ReadLine();
-                MatHang = KhoiTaoMatHang(chuoiMatHang);
-                listMatHang.Add(MatHang);
+                FileStream file = File.Create(filePath);
+                file.Close();
 
             }
-      
-            reader.Close();
+            else
+            {
+                StreamReader reader = new StreamReader(filePath);
+                
+                String test = reader.ReadLine();
+               if(string.IsNullOrEmpty(test))
+                {
+                    reader.Close();
+                    return listMatHang;
+                }
+              int n = int.Parse(test);
+                
+
+                MATHANG MatHang;
+                for (int i = 0; i < n; i++)
+                {
+                    String chuoiMatHang = reader.ReadLine();
+
+                    MatHang = JsonConvert.DeserializeObject<MATHANG>(chuoiMatHang);
+                    listMatHang.Add(MatHang);
+                }
+
+                reader.Close();
+               
+            }
 
             return listMatHang;
         }
@@ -60,11 +74,18 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
 
         public static void LuuDanhSachMatHang(List<MATHANG> listMatHang)
         {
-            StreamWriter writer = new StreamWriter("E:\\mathang.txt");
+            StreamWriter writer = new StreamWriter(@"E:\mathang.json");
             writer.WriteLine(listMatHang.Count());
-            for(int i = 0; i < listMatHang.Count(); i++)
-            {
-                writer.WriteLine($"{i + 1},{listMatHang[i].TenHang}, {listMatHang[i].HanDung}, {listMatHang[i].CongTySanXuat}, {listMatHang[i].NamSanxuat}, {listMatHang[i].LoaiHang}");
+          
+
+            for (int i = 0; i < listMatHang.Count(); i++)
+            { String num = (i + 1).ToString();
+                MATHANG matHang = listMatHang[i];
+
+                matHang.MaMatHang = num;
+                
+                String json = JsonConvert.SerializeObject(matHang);
+                writer.WriteLine(json);
             }
             writer.Close();
 

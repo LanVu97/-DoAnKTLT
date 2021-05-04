@@ -8,13 +8,13 @@
     MATHANG matHang = new MATHANG();
     if (string.IsNullOrEmpty(maMatHang))
     {
-        Chuoi = "Ma mat hang khong hop le";
+        Chuoi = "Ma mat hang nay khong ton tai";
     }else
     {
         matHang = XL_MATHANG.TimKiemMatHang_MaMH(maMatHang);
         if (string.IsNullOrEmpty(matHang.MaMatHang))
         {
-            Chuoi = "Khong tim thay mat hang";
+            Chuoi = "Khong co mat hang nao co ma nay";
         }else
         {
             if (IsPost)
@@ -88,7 +88,6 @@
                 <input type="submit" value="Sua Mat Hang">
          </form> 
     </div>
-    @Chuoi
     </body>
 </html>
 

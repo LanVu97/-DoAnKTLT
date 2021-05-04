@@ -4,35 +4,50 @@ using System.IO;
 using System.Linq;
 using System.Web;
 using QuanLiCuaHang.ENTITIES;
+using Newtonsoft.Json;
+
 namespace QuanLiCuaHang.DATA_ACCESS_LAYER
 {
     public class LT_LOAI_HANG
     {
         public static List<LOAI_HANG> DocLoaiHang()
         {
-            StreamReader reader = new StreamReader("E:\\loaihang.txt");
+
+
+            string filePath = @"E:\loaihang.json";
             List<LOAI_HANG> listLoaiHang = new List<LOAI_HANG>();
-            String number = reader.ReadLine();
-            int n;
-            if (string.IsNullOrEmpty(number))
+            // Kiểm tra đường dẫn này có tồn tại hay không?
+            if (!File.Exists(filePath))
             {
-                n = 0;
-            }else
-            {
-               // String a = reader.ReadLine();
-                n = int.Parse(number);
-            }
-
-            LOAI_HANG LoaiHang;
-            for (int i = 0; i < n; i++)
-            {
-                String chuoiLoaiHang = reader.ReadLine();
-                LoaiHang = KhoiTaoLoaiHang(chuoiLoaiHang);
-                listLoaiHang.Add(LoaiHang);
+                FileStream file = File.Create(filePath);
+                file.Close();
 
             }
-      
-            reader.Close();
+            else
+            {
+                StreamReader reader = new StreamReader(filePath);
+
+                String test = reader.ReadLine();
+                if (string.IsNullOrEmpty(test))
+                {
+                    reader.Close();
+                    return listLoaiHang;
+                }
+                int n = int.Parse(test);
+
+
+                LOAI_HANG LoaiHang;
+                for (int i = 0; i < n; i++)
+                {
+                    String chuoiLoaiHang = reader.ReadLine();
+                    
+                    LoaiHang = JsonConvert.DeserializeObject<LOAI_HANG>(chuoiLoaiHang);
+                    listLoaiHang.Add(LoaiHang);
+                }
+
+                reader.Close();
+
+            }
 
             return listLoaiHang;
         }
@@ -57,13 +72,20 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
 
         public static void LuuDanhSachLoaiHang(List<LOAI_HANG> listLoaiHang)
         {
-            StreamWriter writer = new StreamWriter("E:\\loaihang.txt");
+            StreamWriter writer = new StreamWriter(@"E:\loaihang.json");
             writer.WriteLine(listLoaiHang.Count());
-            for(int i = 0; i < listLoaiHang.Count(); i++)
+            for (int i = 0; i < listLoaiHang.Count(); i++)
             {
-                writer.WriteLine($"{i + 1},{listLoaiHang[i].TenLoaiHang}");
+                String num = (i + 1).ToString();
+                LOAI_HANG LoaiHang = listLoaiHang[i];
+
+                LoaiHang.MaLoaiHang = num;
+
+                String json = JsonConvert.SerializeObject(LoaiHang);
+                writer.WriteLine(json);
             }
             writer.Close();
+
 
         }
 

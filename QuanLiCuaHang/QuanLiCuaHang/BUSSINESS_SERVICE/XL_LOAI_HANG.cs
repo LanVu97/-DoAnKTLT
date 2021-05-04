@@ -14,7 +14,7 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
         {
             return LT_LOAI_HANG.DocLoaiHang();
         }
-        public static List<LOAI_HANG> TimKiemLoaiHang(String keyword)
+        public static List<LOAI_HANG> TimKiemLoaiHang(String tenLoaiHang)
         {
             
             List<LOAI_HANG> listLoaiHang = LT_LOAI_HANG.DocLoaiHang();
@@ -27,7 +27,7 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
 
             for(int i = 0; i < listLoaiHang.Count(); i++)
             {
-                if (listLoaiHang[i].TenLoaiHang.Contains(keyword))
+                if (listLoaiHang[i].TenLoaiHang.Contains(tenLoaiHang))
                 {
                     listKetQuaTimKiem.Add(listLoaiHang[i]);
                 }
@@ -56,6 +56,20 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
         public static void XoaLoaiHang(String matLoaiHang)
         {
             LT_LOAI_HANG.XoaLoaiHang(matLoaiHang);
+           
+        }
+
+        public static bool LoaiHangChuaDung(String tenLoaiHang)
+        {
+            List<MATHANG> listMatHang = LT_MATHANG.DocMatHang();
+            for (int i = 0; i < listMatHang.Count(); i++)
+            {
+                if (listMatHang[i].LoaiHang == tenLoaiHang)
+                {
+                    return false;
+                }
+            }
+            return true;
         }
 
         public static void SuaLoaiHang(LOAI_HANG LoaiHang)
