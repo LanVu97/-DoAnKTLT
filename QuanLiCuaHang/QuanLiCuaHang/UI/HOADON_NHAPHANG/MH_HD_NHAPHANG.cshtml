@@ -3,12 +3,12 @@
 @{
     Layout = null;
     String keyword = string.Empty;
-    List<HOADON> ListHDBanHang = null;
+    List<HOADON> ListHDNhapHang = null;
     if (IsPost)
     {
         keyword = Request["keyword"];
     }
-    ListHDBanHang = XL_HD_BANHANG.TimKiemHDBanHang(keyword);
+    ListHDNhapHang = XL_HD_NHAPHANG.TimKiemHDNhapHang(keyword);
 
 }
 
@@ -17,7 +17,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Danh Sach Hóa Đơn Bán Hàng </title>
+    <title>Danh Sách Hóa Đơn Nhập Hàng </title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -38,12 +38,12 @@
 </head>
 <body>
       <div>
-        <form action="~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml" method="post">
+        <form action="~/UI/HOADON_NHAPHANG/MH_HD_NHAPHANG.cshtml" method="post">
             <br />
             <input type="text" name="keyword" placeholder="ma hoa don/ ngay tao hoa don" />
             <input type="submit" value="TimKiem" /> <br><br>
-            <a href="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG.cshtml">Them hoa don ban hang</a><br>
-            @if (ListHDBanHang != null)
+            <a href="~/UI/HOADON_NHAPHANG/MH_THEM_HD_NHAPHANG.cshtml">Them hoa don nhap hang</a><br>
+            @if (ListHDNhapHang != null)
             {
                 <table>
                     <tr>
@@ -53,15 +53,15 @@
                         <th></th>
                     </tr>
 
-                    @for (int i = 0; i < ListHDBanHang.Count(); i++)
+                    @for (int i = 0; i < ListHDNhapHang.Count(); i++)
                 {
                         <tr>
-                            <th>@ListHDBanHang[i].maHoaDon</th>
-                            <th>@ListHDBanHang[i].ngayTaoHoaDon</th>
-                            <th>@ListHDBanHang[i].tongSoLuong</th>
+                            <th>@ListHDNhapHang[i].maHoaDon</th>
+                            <th>@ListHDNhapHang[i].ngayTaoHoaDon</th>
+                            <th>@ListHDNhapHang[i].tongSoLuong</th>
                             <th>
-                                <a href="~/UI/HOADON_BANHANG/MH_XOA_HD_BANHANG.cshtml?maHoaDon=@ListHDBanHang[i].maHoaDon">Xoa hoa don</a>
-                                <a href="~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=@ListHDBanHang[i].maHoaDon">Sua hoa don</a>
+                                <a href="~/UI/HOADON_NHAPHANG/MH_XOA_HD_NHAPHANG.cshtml?maHoaDon=@ListHDNhapHang[i].maHoaDon">Xoa hoa don</a>
+                                <a href="~/UI/HOADON_NHAPHANG/MH_SUA_HD_NHAPHANG.cshtml?maHoaDon=@ListHDNhapHang[i].maHoaDon">Sua hoa don</a>
                             </th>
                         </tr>
                 }

@@ -5,15 +5,15 @@
     List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
     String maMatHang = Request["maMatHang"];
     String maHD = Request["maHD"];
-    HD_BANHANG HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
+    HOADON HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
 
-    List<CHITIET_HDBH> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+    List<CHITIET_HD> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
     if (Session["listMatHangUpdate"] != null)
     {
-        listChiTietHoaDon = (List<CHITIET_HDBH>)Session["listMatHangUpdate"];
+        listChiTietHoaDon = (List<CHITIET_HD>)Session["listMatHangUpdate"];
     }
-    CHITIET_HDBH matHang = XL_CHITIET_HDBH.TimHoaDon(maMatHang, listChiTietHoaDon);
-    CHITIET_HDBH chiTietDonHang;
+    CHITIET_HD matHang = XL_CHITIET_HD.TimHoaDon(maMatHang, listChiTietHoaDon);
+    CHITIET_HD chiTietDonHang;
 
     if (IsPost)
     {
@@ -25,7 +25,7 @@
         chiTietDonHang.matHang.LoaiHang = Request["LoaiHang"];
         chiTietDonHang.soLuong = int.Parse(Request["soLuong"]);
 
-        listChiTietHoaDon = XL_CHITIET_HDBH.UpdateMatHang(chiTietDonHang, listChiTietHoaDon);
+        listChiTietHoaDon = XL_CHITIET_HD.UpdateMatHang(chiTietDonHang, listChiTietHoaDon);
         Session["listMatHangUpdate"] = listChiTietHoaDon;
         Response.Redirect("~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=" + maHD);
     }
@@ -87,7 +87,7 @@
 
             <label for="lname">So Luong:</label><br>
             <input type="text" id="lname" name="soLuong" value="@matHang.soLuong"><br><br>
-            <input type="submit" value="Them vào hóa đơn">
+            <input type="submit" value="sửa mặt hàng">
         </form>
         
     </div>

@@ -4,8 +4,8 @@
     Layout = null;
     String maMatHang = Request["maMatHang"];
     String maHD = Request["maHD"];
-    HOADON HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
-    List<CHITIET_HD> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+    HOADON HDNhapHang = XL_HD_NHAPHANG.TimKiemHDNhapHang_MaHD(maHD);
+    List<CHITIET_HD> listChiTietHoaDon = HDNhapHang.listChitietHoaDon;
 
     if (Session["listMatHangUpdate"] != null)
     {
@@ -17,7 +17,7 @@
     {
         listChiTietHoaDon = XL_CHITIET_HD.XoaMatHang(matHang, listChiTietHoaDon);
         Session["listMatHangUpdate"] = listChiTietHoaDon;
-        Response.Redirect("~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=" + maHD);
+        Response.Redirect("~/UI/HOADON_NHAPHANG/MH_SUA_HD_NHAPHANG.cshtml?maHoaDon=" + maHD);
     }
 
 }
@@ -48,7 +48,7 @@
 </head>
 <body>
     <div>
-        <form action="~/UI/CHITIET_HDBH/MH_XOA_CHITIET_HDBH.cshtml?maMatHang=@maMatHang&maHD=@maHD" method="post">
+        <form action="~/UI/CHITIET_HD_NHAPHANG/MH_XOA_CHITIET_HD_NHAPHANG.cshtml?maMatHang=@maMatHang&maHD=@maHD" method="post">
             <p>Bạn có chắc muốn xóa mặt hàng này khỏi hóa đơn bán hàng ?</p>
             <input type="submit" value="Xoa khoi hóa đơn">
         </form>

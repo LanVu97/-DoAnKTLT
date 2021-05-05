@@ -3,24 +3,23 @@
 @{
     Layout = null;
     String maHoaDon = Request["maHoaDon"];
-    HOADON HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHoaDon);
-    List<CHITIET_HD> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+    HOADON HDNhapHang = XL_HD_NHAPHANG.TimKiemHDNhapHang_MaHD(maHoaDon);
+    List<CHITIET_HD> listChiTietHoaDon = HDNhapHang.listChitietHoaDon;
     if (Session["listMatHangUpdate"] != null)
     {
         listChiTietHoaDon = (List<CHITIET_HD>)Session["listMatHangUpdate"];
     }
-    int tongSoLuong = XL_HD_BANHANG.TinhTongSoLuong(listChiTietHoaDon);
-    HDBanHang.tongSoLuong = tongSoLuong;
+    int tongSoLuong = XL_HD_NHAPHANG.TinhTongSoLuong(listChiTietHoaDon);
+    HDNhapHang.tongSoLuong = tongSoLuong;
     if (IsPost)
     {
-        HDBanHang.maHoaDon = maHoaDon;
-        HDBanHang.ngayTaoHoaDon = Request["ngayTao"];
-        HDBanHang.listChitietHoaDon = listChiTietHoaDon;
+        HDNhapHang.maHoaDon = maHoaDon;
+        HDNhapHang.ngayTaoHoaDon = Request["ngayTao"];
+        HDNhapHang.listChitietHoaDon = listChiTietHoaDon;
 
-        XL_HD_BANHANG.SuaHDBanHang(HDBanHang);
+        XL_HD_NHAPHANG.SuaHDNhapHang(HDNhapHang);
         Session.Clear();
-        Response.Redirect("~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml");
-
+        Response.Redirect("~/UI/HOADON_NHAPHANG/MH_HD_NHAPHANG.cshtml");
     }
 
 }
@@ -73,7 +72,7 @@
 <body>
     <div class="row">
         <div class="column side">
-            <h2>Chi tiết hóa đơn bán hàng </h2>
+            <h2>Chi tiết hóa đơn nhập hàng </h2>
             <table>
                 <tr>
                     <th>Ma Mat Hang</th>
@@ -97,21 +96,21 @@
                         <th>@listChiTietHoaDon[i].matHang.LoaiHang</th>
                         <th>@listChiTietHoaDon[i].soLuong</th>
                         <th>
-                            <a href="~/UI/CHITIET_HDBH/MH_SUA_CHITIET_HDBH.cshtml?maMatHang=@listChiTietHoaDon[i].matHang.MaMatHang&maHD=@maHoaDon">Sua san pham</a><br>
-                            <a href="~/UI/CHITIET_HDBH/MH_XOA_CHITIET_HDBH.cshtml?maMatHang=@listChiTietHoaDon[i].matHang.MaMatHang&maHD=@maHoaDon">Xoa san pham</a>
+                            <a href="~/UI/CHITIET_HD_NHAPHANG/MH_SUA_CHITIET_HD_NHAPHANG.cshtml?maMatHang=@listChiTietHoaDon[i].matHang.MaMatHang&maHD=@maHoaDon">Sua san pham</a><br>
+                            <a href="~/UI/CHITIET_HD_NHAPHANG/MH_XOA_CHITIET_HD_NHAPHANG.cshtml?maMatHang=@listChiTietHoaDon[i].matHang.MaMatHang&maHD=@maHoaDon">Xoa san pham</a>
                         </th>
                     </tr>
                 }
             </table>
-            <a href="~/UI/CHITIET_HDBH/MH_THEM(SUA)_CHITIET_HDBH?maHD=@maHoaDon">Them san pham</a>
+            <a href="~/UI/CHITIET_HD_NHAPHANG/MH_THEM(SUA)_CHITIET_HD_NHAPHANG.cshtml?maHD=@maHoaDon">Them san pham</a>
         </div>
-        <div class="column middle">
-            <form action="~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=@maHoaDon" method="post">
+        <div class="column middle"> 
+            <form action="~/UI/HOADON_NHAPHANG/MH_SUA_HD_NHAPHANG.cshtml?maHoaDon=@maHoaDon" method="post">
                 <br> <br> <br> <br>
                 <label for="fname">Ngay tao hoa don:</label><br>
-                <input type="text" id="fname" name="ngayTao" value="@HDBanHang.ngayTaoHoaDon"><br>
+                <input type="text" id="fname" name="ngayTao" value="@HDNhapHang.ngayTaoHoaDon"><br>
                 <label for="lname"> Tong So Luong:</label>
-                @HDBanHang.tongSoLuong
+                @HDNhapHang.tongSoLuong
                 <br>
                 <input type="submit" value="Sua hoa don">
             </form>

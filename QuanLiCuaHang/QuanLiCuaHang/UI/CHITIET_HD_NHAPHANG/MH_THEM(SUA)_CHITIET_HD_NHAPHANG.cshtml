@@ -6,8 +6,8 @@
     List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
 
     CHITIET_HD chiTietDonHang;
-    HOADON HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
-    List<CHITIET_HD> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+    HOADON HDNhapHang = XL_HD_NHAPHANG.TimKiemHDNhapHang_MaHD(maHD);
+    List<CHITIET_HD> listChiTietHoaDon = HDNhapHang.listChitietHoaDon;
     if (Session["listMatHangUpdate"] != null)
     {
         listChiTietHoaDon = (List<CHITIET_HD>)Session["listMatHangUpdate"];
@@ -26,7 +26,7 @@
 
         listChiTietHoaDon.Add(chiTietDonHang);
         Session["listMatHangUpdate"] = listChiTietHoaDon;
-        Response.Redirect("~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=" + maHD);
+        Response.Redirect("~/UI/HOADON_NHAPHANG/MH_SUA_HD_NHAPHANG.cshtml?maHoaDon=" + maHD);
     }
 
 }
@@ -57,7 +57,7 @@
 </head>
 <body>
     <div>
-        <form action="~/UI/CHITIET_HDBH/MH_THEM(SUA)_CHITIET_HDBH?maHD=@maHD" method="post">
+        <form action="~/UI/CHITIET_HD_NHAPHANG/MH_THEM(SUA)_CHITIET_HD_NHAPHANG.cshtml?maHD=@maHD" method="post">
             <label for="lname">Ten Hang:</label><br>
             <input type="text" id="lname" name="tenMH"><br><br>
             <label for="fname">Han Dung:</label><br>
@@ -82,5 +82,4 @@
 </body>
 </html>
 
-            
-            
+

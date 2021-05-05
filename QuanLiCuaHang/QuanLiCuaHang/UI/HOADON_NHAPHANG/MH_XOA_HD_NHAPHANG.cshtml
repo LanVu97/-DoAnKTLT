@@ -10,8 +10,8 @@
     }
     else
     {
-        HOADON hdBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHoaDon);
-        if (string.IsNullOrEmpty(hdBanHang.maHoaDon))
+        HOADON hdNhapHang = XL_HD_NHAPHANG.TimKiemHDNhapHang_MaHD(maHoaDon);
+        if (string.IsNullOrEmpty(hdNhapHang.maHoaDon))
         {
             Chuoi = "Ma hoa don nay khong ton tai";
         }
@@ -20,8 +20,8 @@
             {
                 if (IsPost)
                 {
-                    XL_HD_BANHANG.XoaHDBanHang(maHoaDon);
-                    Response.Redirect("~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml");
+                    XL_HD_NHAPHANG.XoaHDNhapHang(maHoaDon);
+                    Response.Redirect("~/UI/HOADON_NHAPHANG/MH_HD_NHAPHANG.cshtml");
                 }
 
             }
@@ -53,8 +53,8 @@
     </style>
 </head>
 <body>
-    <div>
-        <form action="~/UI/HOADON_BANHANG/MH_XOA_HD_BANHANG.cshtml?maHoaDon=@maHoaDon" method="post">
+    <div> 
+        <form action="~/UI/HOADON_NHAPHANG/MH_XOA_HD_NHAPHANG.cshtml?maHoaDon=@maHoaDon" method="post">
             Bạn có chắc chắn muốn xóa hóa đơn này ?
             <input type="submit" value="Đồng Ý">
         </form>

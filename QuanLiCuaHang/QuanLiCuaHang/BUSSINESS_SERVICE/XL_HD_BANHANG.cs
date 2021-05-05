@@ -9,22 +9,18 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
     public class XL_HD_BANHANG
 
     {
-
-        public static List<HD_BANHANG> DocHDBanHang()
+        public static List<HOADON> DocHDBanHang()
         {
             return LT_HD_BANHANG.DocHDBanHang();
         }
-        public static List<HD_BANHANG> TimKiemHDBanHang(String keyword)
-        {
-            
-            List<HD_BANHANG> listHDBanHang = LT_HD_BANHANG.DocHDBanHang();
+        public static List<HOADON> TimKiemHDBanHang(String keyword)
+        {            
+            List<HOADON> listHDBanHang = LT_HD_BANHANG.DocHDBanHang();
             if(listHDBanHang.Count() == 0)
             {
                 return null;
             }
-
-            List<HD_BANHANG> listKetQuaTimKiem = new List<HD_BANHANG>();
-
+            List<HOADON> listKetQuaTimKiem = new List<HOADON>();
             for(int i = 0; i < listHDBanHang.Count(); i++)
             {
                 if (listHDBanHang[i].maHoaDon.Contains(keyword) || listHDBanHang[i].ngayTaoHoaDon.Contains(keyword))
@@ -35,9 +31,9 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
             return listKetQuaTimKiem;
         }
 
-        public static HD_BANHANG TimKiemHDBanHang_MaHD(String maHoaDon)
+        public static HOADON TimKiemHDBanHang_MaHD(String maHoaDon)
         {
-            List<HD_BANHANG> listHDBanHang = LT_HD_BANHANG.DocHDBanHang();
+            List<HOADON> listHDBanHang = LT_HD_BANHANG.DocHDBanHang();
 
             for (int i = 0; i < listHDBanHang.Count(); i++)
             {
@@ -46,10 +42,10 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
                     return listHDBanHang[i];
                 }
             }
-            return new HD_BANHANG();
+            return new HOADON();
         }
 
-        public static void ThemHDBanHang(HD_BANHANG HDBanHang)
+        public static void ThemHDBanHang(HOADON HDBanHang)
         {
             LT_HD_BANHANG.LuuHDBanHang(HDBanHang);
         }
@@ -58,12 +54,12 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
             LT_HD_BANHANG.XoaHDBanHang(maHDBanHang);
         }
 
-        public static void SuaHDBanHang(HD_BANHANG HDBanHang)
+        public static void SuaHDBanHang(HOADON HDBanHang)
         {
             LT_HD_BANHANG.SuaHDBanHang(HDBanHang);
         }
 
-        public static int TinhTongSoLuong(List<CHITIET_HDBH> ListChiTietHoaDon)
+        public static int TinhTongSoLuong(List<CHITIET_HD> ListChiTietHoaDon)
         {
             int sum = 0;
             for(int i = 0; ListChiTietHoaDon != null && i < ListChiTietHoaDon.Count(); i++)

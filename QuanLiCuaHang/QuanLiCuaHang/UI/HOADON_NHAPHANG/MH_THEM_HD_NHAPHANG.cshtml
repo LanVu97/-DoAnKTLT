@@ -4,19 +4,18 @@
     Layout = null;
     List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
     List<CHITIET_HD> listChiTietHoaDon = (List<CHITIET_HD>)Session["listMatHang"];
-    HOADON HDBanHang;
-    int tongSoLuong = XL_HD_BANHANG.TinhTongSoLuong(listChiTietHoaDon);
+    HOADON HDNhapHang;
+    int tongSoLuong = XL_HD_NHAPHANG.TinhTongSoLuong(listChiTietHoaDon);
     if (IsPost)
     {
-        HDBanHang.maHoaDon = string.Empty;
-        HDBanHang.ngayTaoHoaDon = Request["ngayTao"];
-        HDBanHang.tongSoLuong = tongSoLuong;
-        HDBanHang.listChitietHoaDon = listChiTietHoaDon;
+        HDNhapHang.maHoaDon = string.Empty;
+        HDNhapHang.ngayTaoHoaDon = Request["ngayTao"];
+        HDNhapHang.tongSoLuong = tongSoLuong;
+        HDNhapHang.listChitietHoaDon = listChiTietHoaDon;
 
-        XL_HD_BANHANG.ThemHDBanHang(HDBanHang);
+        XL_HD_NHAPHANG.ThemHDNhapHang(HDNhapHang);
         Session.Clear();
-        Response.Redirect("~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml");
-
+        Response.Redirect("~/UI/HOADON_NHAPHANG/MH_HD_NHAPHANG.cshtml");
     }
 
 }
@@ -45,31 +44,31 @@
         }
 
         .column {
-              float: left;
-              padding: 10px;
-            }
+            float: left;
+            padding: 10px;
+        }
 
             /* Left and right column */
             .column.side {
-              width: 60%;
+                width: 60%;
             }
 
             /* Middle column */
             .column.middle {
-              width: 30%;
+                width: 30%;
             }
 
-            .row:after {
-              content: "";
-              display: table;
-              clear: both;
-            }
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
 </head>
 <body>
     <div class="row">
         <div class="column side">
-            <h2>Chi tiết hóa đơn bán hàng </h2>
+            <h2>Chi tiết hóa đơn nhập hàng </h2>
             @if (listChiTietHoaDon == null)
             {
                 <p style="color: red;">  Chưa có mat hang nao</p>
@@ -101,10 +100,11 @@
                     }
                 </table>
             }
-            <a href="~/UI/CHITIET_HDBH/MH_THEM_CHITIET_HDBH.cshtml">Them san pham</a>
+            
+            <a href="~/UI/CHITIET_HD_NHAPHANG/MH_THEM_CHITIET_HD_NHAPHANG.cshtml">Them san pham</a>
         </div>
         <div class="column middle">
-            <form action="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG.cshtml" method="post">
+            <form action="~/UI/HOADON_NHAPHANG/MH_THEM_HD_NHAPHANG.cshtml" method="post">
                 <br> <br> <br> <br>
                 <label for="fname">Ngay tao hoa don:</label><br>
                 <input type="text" id="fname" name="ngayTao"><br>

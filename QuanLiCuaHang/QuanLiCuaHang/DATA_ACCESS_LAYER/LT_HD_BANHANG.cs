@@ -11,52 +11,61 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
     public class LT_HD_BANHANG
 
     {
-        public static List<HD_BANHANG> DocHDBanHang()
+        public static List<HOADON> DocHDBanHang()
         {
-            StreamReader reader = new StreamReader(@"E:\hd_banhang.json");
-            List<HD_BANHANG> listHDBanHang = new List<HD_BANHANG>();
-            
-            String number = reader.ReadLine();
-            int n;
-            if (string.IsNullOrEmpty(number))
+
+            string filePath = @"E:\hd_banhang.json";
+            List<HOADON> listHDBanHang = new List<HOADON>();
+            // Kiểm tra đường dẫn này có tồn tại hay không?
+            if (!File.Exists(filePath))
             {
-                n = 0;
-            }else
-            {
-               // String a = reader.ReadLine();
-                n = int.Parse(number);
-                HD_BANHANG hdBanHang;
-                for (int i = 0; i < n; i++)
-                {
-                    String chuoiHDBanHang = reader.ReadLine();
-                    
-                    hdBanHang = JsonConvert.DeserializeObject<HD_BANHANG>(chuoiHDBanHang);
-                    listHDBanHang.Add(hdBanHang);
-                }
+                FileStream file = File.Create(filePath);
+                file.Close();
+
             }
+            else
+            {
+                StreamReader reader = new StreamReader(filePath);
+                String number = reader.ReadLine();
+                int n;
+                if (string.IsNullOrEmpty(number))
+                {
+                    n = 0;
+                }
+                else
+                {
+                    // String a = reader.ReadLine();
+                    n = int.Parse(number);
+                    HOADON hdBanHang;
+                    for (int i = 0; i < n; i++)
+                    {
+                        String chuoiHDBanHang = reader.ReadLine();
 
-            
-      
-            reader.Close();
-
+                        hdBanHang = JsonConvert.DeserializeObject<HOADON>(chuoiHDBanHang);
+                        listHDBanHang.Add(hdBanHang);
+                    }
+                }
+                reader.Close();
+            }
             return listHDBanHang;
         }
 
-        public static void LuuHDBanHang(HD_BANHANG hdBanHang)
-        {   
-            List<HD_BANHANG> listHDBanHang = DocHDBanHang();
+
+        public static void LuuHDBanHang(HOADON hdBanHang)
+        {
+            List<HOADON> listHDBanHang = DocHDBanHang();
             hdBanHang.maHoaDon = (listHDBanHang.Count() + 1).ToString();
             listHDBanHang.Add(hdBanHang);
             LuuDanhSachHDBanHang(listHDBanHang);
         }
 
-        public static void LuuDanhSachHDBanHang(List<HD_BANHANG> listHDBanHang)
+        public static void LuuDanhSachHDBanHang(List<HOADON> listHDBanHang)
         {
             StreamWriter writer = new StreamWriter(@"E:\hd_banhang.json");
             writer.WriteLine(listHDBanHang.Count());
-            for(int i = 0; i < listHDBanHang.Count(); i++)
+            for (int i = 0; i < listHDBanHang.Count(); i++)
             {
-                HD_BANHANG hoaDonBanHang = listHDBanHang[i];
+                HOADON hoaDonBanHang = listHDBanHang[i];
                 String num = (i + 1).ToString();
                 hoaDonBanHang.maHoaDon = num;
 
@@ -69,10 +78,10 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
 
         public static void XoaHDBanHang(String maHDBanHang)
         {
-            List<HD_BANHANG> listHDBanHang = DocHDBanHang();
-            for(int i = 0; i < listHDBanHang.Count(); i++)
+            List<HOADON> listHDBanHang = DocHDBanHang();
+            for (int i = 0; i < listHDBanHang.Count(); i++)
             {
-                if(listHDBanHang[i].maHoaDon == maHDBanHang)
+                if (listHDBanHang[i].maHoaDon == maHDBanHang)
                 {
                     listHDBanHang.Remove(listHDBanHang[i]);
                     break;
@@ -82,13 +91,13 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
             LuuDanhSachHDBanHang(listHDBanHang);
         }
 
-        public static void SuaHDBanHang(HD_BANHANG HDBanHang)
+        public static void SuaHDBanHang(HOADON HDBanHang)
         {
-            List<HD_BANHANG> listHDBanHang = DocHDBanHang();
+            List<HOADON> listHDBanHang = DocHDBanHang();
 
-            for(int i = 0; i < listHDBanHang.Count(); i++)
+            for (int i = 0; i < listHDBanHang.Count(); i++)
             {
-                if(listHDBanHang[i].maHoaDon == HDBanHang.maHoaDon)
+                if (listHDBanHang[i].maHoaDon == HDBanHang.maHoaDon)
                 {
                     listHDBanHang[i] = HDBanHang;
                     break;

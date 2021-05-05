@@ -3,16 +3,16 @@
 @{
     Layout = null;
     List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
-    List<CHITIET_HDBH> listMatHang;
-    CHITIET_HDBH chiTietDonHang;
+    List<CHITIET_HD> listMatHang;
+    CHITIET_HD chiTietDonHang;
 
     if (Session["listMatHang"] == null)
     {
-        listMatHang = new List<CHITIET_HDBH>();
+        listMatHang = new List<CHITIET_HD>();
     }
     else
     {
-        listMatHang = (List<CHITIET_HDBH>)Session["listMatHang"];
+        listMatHang = (List<CHITIET_HD>)Session["listMatHang"];
     }
     int num = listMatHang.Count() + 1;
     String maMatHang = num.ToString();

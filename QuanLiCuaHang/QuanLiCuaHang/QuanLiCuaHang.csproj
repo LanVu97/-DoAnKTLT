@@ -93,15 +93,17 @@
     <Content Include="Web.config" />
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="BUSSINESS_SERVICE\XL_CHITIET_HDBH.cs" />
+    <Compile Include="BUSSINESS_SERVICE\XL_CHITIET_HD.cs" />
+    <Compile Include="BUSSINESS_SERVICE\XL_HD_NHAPHANG.cs" />
     <Compile Include="BUSSINESS_SERVICE\XL_HD_BANHANG.cs" />
     <Compile Include="BUSSINESS_SERVICE\XL_LOAI_HANG.cs" />
     <Compile Include="BUSSINESS_SERVICE\XL_MATHANG.cs" />
+    <Compile Include="DATA_ACCESS_LAYER\LT_HD_NHAPHANG.cs" />
     <Compile Include="DATA_ACCESS_LAYER\LT_HD_BANHANG.cs" />
     <Compile Include="DATA_ACCESS_LAYER\LT_LOAI_HANG.cs" />
     <Compile Include="DATA_ACCESS_LAYER\LT_MATHANG.cs" />
-    <Compile Include="ENTITIES\CHITIET_HDBH.cs" />
-    <Compile Include="ENTITIES\HD_BANHANG.cs" />
+    <Compile Include="ENTITIES\CHITIET_HD.cs" />
+    <Compile Include="ENTITIES\HOADON.cs" />
     <Compile Include="ENTITIES\MATHANG.cs" />
     <Compile Include="ENTITIES\LOAI_HANG.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
@@ -125,6 +127,14 @@
     <Content Include="UI\CHITIET_HDBH\MH_SUA_CHITIET_HDBH.cshtml" />
     <Content Include="UI\CHITIET_HDBH\MH_XOA_CHITIET_HDBH.cshtml" />
     <Content Include="UI\CHITIET_HDBH\MH_THEM%28SUA%29_CHITIET_HDBH.cshtml" />
+    <Content Include="UI\HOADON_NHAPHANG\MH_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\HOADON_NHAPHANG\MH_THEM_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\HOADON_NHAPHANG\MH_XOA_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\CHITIET_HD_NHAPHANG\MH_SUA_CHITIET_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\CHITIET_HD_NHAPHANG\MH_THEM%28SUA%29_CHITIET_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\CHITIET_HD_NHAPHANG\MH_THEM_CHITIET_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\CHITIET_HD_NHAPHANG\MH_XOA_CHITIET_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\HOADON_NHAPHANG\MH_SUA_HD_NHAPHANG.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>
