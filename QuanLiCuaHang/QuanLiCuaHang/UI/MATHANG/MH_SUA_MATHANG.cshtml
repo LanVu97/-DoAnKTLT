@@ -75,14 +75,19 @@
                 <label for="fname">Nam San Xuat:</label><br>
                 <input type="text" id="fname" name="namSX" value="@matHang.NamSanxuat"><br>
                 <label for="lname">Loai Hang:</label><br>
-                
-                    <select name="LoaiHang">
-                        @for (int i = 0; i < LoaiHang.Count(); i++)
+                   
+                <select name="LoaiHang">
+                    <option selected="selected"> @matHang.LoaiHang</option>
+                    @for (int i = 0; i < LoaiHang.Count(); i++)
+                    {
+                        if (@LoaiHang[i].TenLoaiHang != @matHang.LoaiHang)
                         {
                             <option value="@LoaiHang[i].TenLoaiHang">@LoaiHang[i].TenLoaiHang</option>
                         }
 
-                    </select>
+                    }
+
+                </select>
 
             <br><br>
                 <input type="submit" value="Sua Mat Hang">

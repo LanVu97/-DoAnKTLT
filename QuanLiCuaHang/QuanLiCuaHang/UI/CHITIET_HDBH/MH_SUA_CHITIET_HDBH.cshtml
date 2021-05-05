@@ -1,0 +1,98 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
+    String maMatHang = Request["maMatHang"];
+    String maHD = Request["maHD"];
+    HD_BANHANG HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
+
+    List<CHITIET_HDBH> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+    if (Session["listMatHangUpdate"] != null)
+    {
+        listChiTietHoaDon = (List<CHITIET_HDBH>)Session["listMatHangUpdate"];
+    }
+    CHITIET_HDBH matHang = XL_CHITIET_HDBH.TimHoaDon(maMatHang, listChiTietHoaDon);
+    CHITIET_HDBH chiTietDonHang;
+
+    if (IsPost)
+    {
+        chiTietDonHang.matHang.MaMatHang = maMatHang;
+        chiTietDonHang.matHang.TenHang = Request["tenMH"];
+        chiTietDonHang.matHang.HanDung = Request["hanDung"];
+        chiTietDonHang.matHang.CongTySanXuat = Request["congTySanXuat"];
+        chiTietDonHang.matHang.NamSanxuat = int.Parse(Request["namSX"]);
+        chiTietDonHang.matHang.LoaiHang = Request["LoaiHang"];
+        chiTietDonHang.soLuong = int.Parse(Request["soLuong"]);
+
+        listChiTietHoaDon = XL_CHITIET_HDBH.UpdateMatHang(chiTietDonHang, listChiTietHoaDon);
+        Session["listMatHangUpdate"] = listChiTietHoaDon;
+        Response.Redirect("~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=" + maHD);
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/CHITIET_HDBH/MH_SUA_CHITIET_HDBH.cshtml?maMatHang=@maMatHang&maHD=@maHD" method="post">
+
+            <label for="lname">Ten Hang:</label><br>
+            <input type="text" id="lname" name="tenMH" value="@matHang.matHang.TenHang"><br><br>
+            <label for="fname">Han Dung:</label><br>
+            <input type="text" id="fname" name="hanDung" value="@matHang.matHang.HanDung"><br>
+            <label for="lname">Cong Ty San Xuat:</label><br>
+            <input type="text" id="lname" name="congTySanXuat" value="@matHang.matHang.CongTySanXuat"><br><br>
+            <label for="fname">Nam San Xuat:</label><br>
+            <input type="text" id="fname" name="namSX" value="@matHang.matHang.NamSanxuat"><br>
+            <label for="lname">Loai Hang:</label><br>
+
+            <select name="LoaiHang" >
+                <option selected="selected"> @matHang.matHang.LoaiHang</option>
+                @for (int i = 0; i < LoaiHang.Count(); i++)
+                {
+                    if (@LoaiHang[i].TenLoaiHang != @matHang.matHang.LoaiHang)
+                    {
+                    <option value="@LoaiHang[i].TenLoaiHang">@LoaiHang[i].TenLoaiHang</option>
+                }
+
+                }
+
+            </select>
+
+            <br><br>
+
+            <label for="lname">So Luong:</label><br>
+            <input type="text" id="lname" name="soLuong" value="@matHang.soLuong"><br><br>
+            <input type="submit" value="Them vào hóa đơn">
+        </form>
+        
+    </div>
+</body>
+</html>
+
+            
+            

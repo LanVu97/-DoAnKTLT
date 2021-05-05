@@ -42,17 +42,6 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
             return listHDBanHang;
         }
 
-        //public static HD_BANHANG KhoiTaoHDBanHang(String chuoiLoaiHang)
-        //{
-        //    HD_BANHANG hdBanHang;
-        //    String[] s = chuoiLoaiHang.Split(',');
-        //    hdBanHang.maHoaDon = s[0].Trim();
-        //    hdBanHang.ngayTaoHoaDon = s[1].Trim();
-        //    hdBanHang.tongSoLuong = int.Parse(s[2].Trim());
-            
-        //    return hdBanHang;
-        //}
-
         public static void LuuHDBanHang(HD_BANHANG hdBanHang)
         {   
             List<HD_BANHANG> listHDBanHang = DocHDBanHang();
@@ -67,8 +56,11 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
             writer.WriteLine(listHDBanHang.Count());
             for(int i = 0; i < listHDBanHang.Count(); i++)
             {
-                // writer.WriteLine($"{i + 1},{listHDBanHang[i].ngayTaoHoaDon}, {listHDBanHang[i].tongSoLuong + 1}");
-                String json = JsonConvert.SerializeObject(listHDBanHang[i]);
+                HD_BANHANG hoaDonBanHang = listHDBanHang[i];
+                String num = (i + 1).ToString();
+                hoaDonBanHang.maHoaDon = num;
+
+                String json = JsonConvert.SerializeObject(hoaDonBanHang);
                 writer.WriteLine(json);
             }
             writer.Close();

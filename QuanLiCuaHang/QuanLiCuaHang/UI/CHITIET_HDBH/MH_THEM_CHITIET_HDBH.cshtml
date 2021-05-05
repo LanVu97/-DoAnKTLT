@@ -2,26 +2,33 @@
 @using QuanLiCuaHang.BUSSINESS_SERVICE;
 @{
     Layout = null;
-    String keyword = string.Empty;
     List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
-    
-    MATHANG matHang;
+    List<CHITIET_HDBH> listMatHang;
     CHITIET_HDBH chiTietDonHang;
+
+    if (Session["listMatHang"] == null)
+    {
+        listMatHang = new List<CHITIET_HDBH>();
+    }
+    else
+    {
+        listMatHang = (List<CHITIET_HDBH>)Session["listMatHang"];
+    }
+    int num = listMatHang.Count() + 1;
+    String maMatHang = num.ToString();
     if (IsPost)
     {
-        matHang.MaMatHang = String.Empty;
-        matHang.TenHang = Request["tenMH"];
-        matHang.HanDung = Request["hanDung"];
-        matHang.CongTySanXuat = Request["congTySanXuat"];
-        matHang.NamSanxuat = int.Parse(Request["namSX"]);
-        matHang.LoaiHang = Request["LoaiHang"];
-
+        chiTietDonHang.matHang.MaMatHang = maMatHang;
+        chiTietDonHang.matHang.TenHang = Request["tenMH"];
+        chiTietDonHang.matHang.HanDung = Request["hanDung"];
+        chiTietDonHang.matHang.CongTySanXuat = Request["congTySanXuat"];
+        chiTietDonHang.matHang.NamSanxuat = int.Parse(Request["namSX"]);
+        chiTietDonHang.matHang.LoaiHang = Request["LoaiHang"];
         chiTietDonHang.soLuong = int.Parse(Request["soLuong"]);
-        chiTietDonHang.matHang = matHang;
 
-        List<CHITIET_HDBH> listMatHang =  XL_CHITIET_HDBH.ThemVaoListCTHD(chiTietDonHang);
+        listMatHang.Add(chiTietDonHang);
         Session["listMatHang"] = listMatHang;
-        Response.Redirect("~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG .cshtml");
+        Response.Redirect("~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG.cshtml");
     }
 
 }
@@ -31,7 +38,7 @@
 <html>
 <head>
     <meta name="viewport" content="width=device-width" />
-    <title>Danh Sach Mat Hang</title>
+    <title>Them Mat Hang</title>
     <style>
         table {
             font-family: arial, sans-serif;
@@ -52,7 +59,7 @@
 </head>
 <body>
     <div>
-        <form action="~/UI/CHITIET_HDBH/MH_CHITIET_HDBH.cshtml" method="post">
+        <form action="~/UI/CHITIET_HDBH/MH_THEM_CHITIET_HDBH.cshtml" method="post">
 
             <label for="lname">Ten Hang:</label><br>
             <input type="text" id="lname" name="tenMH"><br><br>

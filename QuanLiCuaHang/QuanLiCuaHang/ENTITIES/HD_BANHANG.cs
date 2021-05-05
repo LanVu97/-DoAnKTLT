@@ -11,5 +11,6 @@ namespace QuanLiCuaHang.ENTITIES
         public String ngayTaoHoaDon;
         public int tongSoLuong;
         public List<CHITIET_HDBH> listChitietHoaDon;
+        
     }
 }

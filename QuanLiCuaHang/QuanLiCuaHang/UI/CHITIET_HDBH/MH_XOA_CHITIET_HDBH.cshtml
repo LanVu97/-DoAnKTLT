@@ -1,0 +1,59 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+@{
+    Layout = null;
+    String maMatHang = Request["maMatHang"];
+    String maHD = Request["maHD"];
+    HD_BANHANG HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
+    List<CHITIET_HDBH> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+
+    if (Session["listMatHangUpdate"] != null)
+    {
+        listChiTietHoaDon = (List<CHITIET_HDBH>)Session["listMatHangUpdate"];
+    }
+    CHITIET_HDBH matHang = XL_CHITIET_HDBH.TimHoaDon(maMatHang, listChiTietHoaDon);
+
+    if (IsPost)
+    {
+        listChiTietHoaDon = XL_CHITIET_HDBH.XoaMatHang(matHang, listChiTietHoaDon);
+        Session["listMatHangUpdate"] = listChiTietHoaDon;
+        Response.Redirect("~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=" + maHD);
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Danh Sach Mat Hang</title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <div>
+        <form action="~/UI/CHITIET_HDBH/MH_XOA_CHITIET_HDBH.cshtml?maMatHang=@maMatHang&maHD=@maHD" method="post">
+            <p>Bạn có chắc muốn xóa mặt hàng này khỏi hóa đơn bán hàng ?</p>
+            <input type="submit" value="Xoa khoi hóa đơn">
+        </form>
+    </div>
+</body>
+</html>
+
+

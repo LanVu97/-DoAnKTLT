@@ -2,9 +2,8 @@
 @using QuanLiCuaHang.BUSSINESS_SERVICE;
 @{
     Layout = null;
-    String keyword = string.Empty;
     List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
-    List<CHITIET_HDBH> listChiTietHoaDon = (List<CHITIET_HDBH>) Session["listMatHang"];
+    List<CHITIET_HDBH> listChiTietHoaDon = (List<CHITIET_HDBH>)Session["listMatHang"];
     HD_BANHANG HDBanHang;
     int tongSoLuong = XL_HD_BANHANG.TinhTongSoLuong(listChiTietHoaDon);
     if (IsPost)
@@ -13,6 +12,7 @@
         HDBanHang.ngayTaoHoaDon = Request["ngayTao"];
         HDBanHang.tongSoLuong = tongSoLuong;
         HDBanHang.listChitietHoaDon = listChiTietHoaDon;
+
         XL_HD_BANHANG.ThemHDBanHang(HDBanHang);
         Response.Redirect("~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml");
     }
@@ -65,17 +65,15 @@
     </style>
 </head>
 <body>
-        
-   
-        <div class="row">
-            <div class="column side">
-                <h2>Chi tiết hóa đơn bán hàng </h2>
-                @if (listChiTietHoaDon == null)
-                {
-                    <p style="color: red;"> WARMING : Chưa có mat hang nao</p>
-                }
-                else
-                {
+    <div class="row">
+        <div class="column side">
+            <h2>Chi tiết hóa đơn bán hàng </h2>
+            @if (listChiTietHoaDon == null)
+            {
+                <p style="color: red;">  Chưa có mat hang nao</p>
+            }
+            else
+            {
                 <table>
                     <tr>
                         <th>Ma Mat Hang</th>
@@ -89,7 +87,6 @@
 
                     @for (int i = 0; i < listChiTietHoaDon.Count(); i++)
                     {
-
                         <tr>
                             <th>@listChiTietHoaDon[i].matHang.MaMatHang</th>
                             <th>@listChiTietHoaDon[i].matHang.TenHang</th>
@@ -98,46 +95,27 @@
                             <th>@listChiTietHoaDon[i].matHang.NamSanxuat</th>
                             <th>@listChiTietHoaDon[i].matHang.LoaiHang</th>
                             <th>@listChiTietHoaDon[i].soLuong</th>
-                            
                         </tr>
                     }
-
                 </table>
-                }
-                <a href="~/UI/CHITIET_HDBH/MH_CHITIET_HDBH.cshtml">Them san pham</a>
-            </div>
-
-            <div class="column middle">
-                <form action="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG .cshtml" method="post">
-                    <br> <br> <br> <br>
-                    <label for="fname">Ngay tao hoa don:</label><br>
-                    <input type="text" id="fname" name="ngayTao"><br>
-
-                    <label for="lname"> Tong So Luong:</label>
-                       @tongSoLuong
-                    <br>
-
-                    <input type="submit" value="Them hoa don">
-                </form>
-                    
-            </div>
-
+            }
+            <a href="~/UI/CHITIET_HDBH/MH_THEM_CHITIET_HDBH.cshtml">Them san pham</a>
         </div>
-
-
-
-
-
-
-       
-
-
-
- 
-    
-    </body>
+        <div class="column middle">
+            <form action="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG.cshtml" method="post">
+                <br> <br> <br> <br>
+                <label for="fname">Ngay tao hoa don:</label><br>
+                <input type="text" id="fname" name="ngayTao"><br>
+                <label for="lname"> Tong So Luong:</label>
+                @tongSoLuong
+                <br>
+                <input type="submit" value="Them hoa don">
+            </form>
+        </div>
+    </div>
+</body>
 </html>
 
-            
-            
-            
+
+
+

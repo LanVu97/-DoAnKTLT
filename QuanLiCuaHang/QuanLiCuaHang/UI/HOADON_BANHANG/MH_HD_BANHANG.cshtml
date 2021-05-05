@@ -3,14 +3,10 @@
 @{
     Layout = null;
     String keyword = string.Empty;
-
-    // List<MATHANG> ListMatHang = new List<MATHANG>();
     List<HD_BANHANG> ListHDBanHang = null;
     if (IsPost)
     {
         keyword = Request["keyword"];
-        //ListMatHang = XL_MATHANG.DocMatHang();
-
     }
     ListHDBanHang = XL_HD_BANHANG.TimKiemHDBanHang(keyword);
 
@@ -41,54 +37,43 @@
     </style>
 </head>
 <body>
-    <div>
+      <div>
         <form action="~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml" method="post">
             <br />
-
-            <input type="text" name="keyword" value="Ten Hang" />
-            <input type="submit" value="TimKiem" /> <br />
-            <a href="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG .cshtml">Them hoa don ban hang</a>
+            <input type="text" name="keyword" placeholder="ma hoa don/ ngay tao hoa don" />
+            <input type="submit" value="TimKiem" /> <br><br>
+            <a href="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG.cshtml">Them hoa don ban hang</a><br>
             @if (ListHDBanHang != null)
             {
-
-
                 <table>
                     <tr>
                         <th>Ma hoa don</th>
                         <th>ngay tao</th>
                         <th>so luong</th>
                         <th></th>
-                        <th></th>
                     </tr>
 
                     @for (int i = 0; i < ListHDBanHang.Count(); i++)
                 {
-
                         <tr>
                             <th>@ListHDBanHang[i].maHoaDon</th>
                             <th>@ListHDBanHang[i].ngayTaoHoaDon</th>
                             <th>@ListHDBanHang[i].tongSoLuong</th>
-                            <th><a href="~/UI/MATHANG/MH_XOA_MATHANG.cshtml?maMatHang=@ListHDBanHang[i].maHoaDon">Chi tiet hoa don</a></th>
                             <th>
-                                <a href="~/UI/MATHANG/MH_XOA_MATHANG.cshtml?maMatHang=@ListHDBanHang[i].maHoaDon">Xoa hoa don</a>
-                                <a href="~/UI/MATHANG/MH_SUA_MATHANG.cshtml?maMatHang=@ListHDBanHang[i].maHoaDon">Sua hoa don</a>
+                                <a href="~/UI/HOADON_BANHANG/MH_XOA_HD_BANHANG.cshtml?maHoaDon=@ListHDBanHang[i].maHoaDon">Xoa hoa don</a>
+                                <a href="~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=@ListHDBanHang[i].maHoaDon">Sua hoa don</a>
                             </th>
                         </tr>
-                    }
+                }
 
                 </table>
-
-
             }
             else
             {
-                <p>Chưa có hoa don nao</p>
+                <p>Chưa có hóa đơn nào</p>
             }
 
         </form>
     </div>
 </body>
 </html>
-
-            
-            

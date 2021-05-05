@@ -118,10 +118,13 @@
     <Content Include="UI\LOAIHANG\MH_XOA_LOAIHANG.cshtml" />
     <Content Include="UI\LOAIHANG\MH_SUA_LOAIHANG.cshtml" />
     <Content Include="UI\HOADON_BANHANG\MH_HD_BANHANG.cshtml" />
-    <Content Include="UI\HOADON_BANHANG\MH_THEM_HD_BANHANG .cshtml" />
+    <Content Include="UI\HOADON_BANHANG\MH_THEM_HD_BANHANG.cshtml" />
     <Content Include="UI\HOADON_BANHANG\MH_SUA_HD_BANHANG.cshtml" />
     <Content Include="UI\HOADON_BANHANG\MH_XOA_HD_BANHANG.cshtml" />
-    <Content Include="UI\CHITIET_HDBH\MH_CHITIET_HDBH.cshtml" />
+    <Content Include="UI\CHITIET_HDBH\MH_THEM_CHITIET_HDBH.cshtml" />
+    <Content Include="UI\CHITIET_HDBH\MH_SUA_CHITIET_HDBH.cshtml" />
+    <Content Include="UI\CHITIET_HDBH\MH_XOA_CHITIET_HDBH.cshtml" />
+    <Content Include="UI\CHITIET_HDBH\MH_THEM%28SUA%29_CHITIET_HDBH.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

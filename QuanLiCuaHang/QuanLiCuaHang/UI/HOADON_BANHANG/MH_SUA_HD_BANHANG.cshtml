@@ -2,38 +2,24 @@
 @using QuanLiCuaHang.BUSSINESS_SERVICE;
 @{
     Layout = null;
-    String Chuoi = string.Empty;
-    String maMatHang = Request["maMatHang"];
-    List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
-    MATHANG matHang = new MATHANG();
-    if (string.IsNullOrEmpty(maMatHang))
+    String maHoaDon = Request["maHoaDon"];
+    HD_BANHANG HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHoaDon);
+    List<CHITIET_HDBH> listChiTietHoaDon = HDBanHang.listChitietHoaDon;
+    if (Session["listMatHangUpdate"] != null)
     {
-        Chuoi = "Ma mat hang nay khong ton tai";
-    }else
-    {
-        matHang = XL_MATHANG.TimKiemMatHang_MaMH(maMatHang);
-        if (string.IsNullOrEmpty(matHang.MaMatHang))
-        {
-            Chuoi = "Khong co mat hang nao co ma nay";
-        }else
-        {
-            if (IsPost)
-            {
-                matHang.MaMatHang = maMatHang;
-                matHang.TenHang = Request["tenMH"];
-                matHang.HanDung = Request["hanDung"];
-                matHang.CongTySanXuat = Request["congTySanXuat"];
-                matHang.NamSanxuat = int.Parse(Request["namSX"]);
-                matHang.LoaiHang = Request["LoaiHang"];
-                XL_MATHANG.SuaMatHang(matHang);
-
-                Response.Redirect("~/UI/MATHANG/MH_MATHANG.cshtml");
-            }
-        }
-
+        listChiTietHoaDon = (List<CHITIET_HDBH>)Session["listMatHangUpdate"];
     }
+    int tongSoLuong = XL_HD_BANHANG.TinhTongSoLuong(listChiTietHoaDon);
+    HDBanHang.tongSoLuong = tongSoLuong;
+    if (IsPost)
+    {
+        HDBanHang.maHoaDon = maHoaDon;
+        HDBanHang.ngayTaoHoaDon = Request["ngayTao"];
+        HDBanHang.listChitietHoaDon = listChiTietHoaDon;
 
-
+        XL_HD_BANHANG.SuaHDBanHang(HDBanHang);
+        Response.Redirect("~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml");
+    }
 
 }
 
@@ -59,36 +45,79 @@
         tr:nth-child(even) {
             background-color: #dddddd;
         }
+
+        .column {
+            float: left;
+            padding: 10px;
+        }
+
+            /* Left and right column */
+            .column.side {
+                width: 60%;
+            }
+
+            /* Middle column */
+            .column.middle {
+                width: 30%;
+            }
+
+        .row:after {
+            content: "";
+            display: table;
+            clear: both;
+        }
     </style>
 </head>
 <body>
-    <div>
-        <form action="~/UI/MATHANG/MH_SUA_MATHANG.cshtml?maMatHang=@maMatHang" method="post">
-            
-               
-                <label for="lname">Ten Hang:</label><br>
-                <input type="text" id="lname" name="tenMH" value="@matHang.TenHang"><br><br>
-                <label for="fname">Han Dung:</label><br>
-                <input type="text" id="fname" name="hanDung" value="@matHang.HanDung"><br>
-                <label for="lname">Cong Ty San Xuat:</label><br>
-                <input type="text" id="lname" name="congTySanXuat" value="@matHang.CongTySanXuat"><br><br>
-                <label for="fname">Nam San Xuat:</label><br>
-                <input type="text" id="fname" name="namSX" value="@matHang.NamSanxuat"><br>
-                <label for="lname">Loai Hang:</label><br>
-                
-                    <select name="LoaiHang">
-                        @for (int i = 0; i < LoaiHang.Count(); i++)
-                        {
-                            <option value="@LoaiHang[i].TenLoaiHang">@LoaiHang[i].TenLoaiHang</option>
-                        }
+    <div class="row">
+        <div class="column side">
+            <h2>Chi tiết hóa đơn bán hàng </h2>
+            <table>
+                <tr>
+                    <th>Ma Mat Hang</th>
+                    <th>Ten Hang</th>
+                    <th>Han Dung</th>
+                    <th>Cong Ty San Xuat</th>
+                    <th>Nam San Xuat</th>
+                    <th>Loai Hang</th>
+                    <th>So luong</th>
+                    <th> </th>
+                </tr>
 
-                    </select>
-
-            <br><br>
-                <input type="submit" value="Sua Mat Hang">
-         </form> 
+                @for (int i = 0; i < listChiTietHoaDon.Count(); i++)
+                {
+                    <tr>
+                        <th>@listChiTietHoaDon[i].matHang.MaMatHang</th>
+                        <th>@listChiTietHoaDon[i].matHang.TenHang</th>
+                        <th>@listChiTietHoaDon[i].matHang.HanDung</th>
+                        <th>@listChiTietHoaDon[i].matHang.CongTySanXuat</th>
+                        <th>@listChiTietHoaDon[i].matHang.NamSanxuat</th>
+                        <th>@listChiTietHoaDon[i].matHang.LoaiHang</th>
+                        <th>@listChiTietHoaDon[i].soLuong</th>
+                        <th>
+                            <a href="~/UI/CHITIET_HDBH/MH_SUA_CHITIET_HDBH.cshtml?maMatHang=@listChiTietHoaDon[i].matHang.MaMatHang&maHD=@maHoaDon">Sua san pham</a><br>
+                            <a href="~/UI/CHITIET_HDBH/MH_XOA_CHITIET_HDBH.cshtml?maMatHang=@listChiTietHoaDon[i].matHang.MaMatHang&maHD=@maHoaDon">Xoa san pham</a>
+                        </th>
+                    </tr>
+                }
+            </table>
+            <a href="~/UI/CHITIET_HDBH/MH_THEM(SUA)_CHITIET_HDBH?maHD=@maHoaDon">Them san pham</a>
+        </div>
+        <div class="column middle">
+            <form action="~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=@maHoaDon" method="post">
+                <br> <br> <br> <br>
+                <label for="fname">Ngay tao hoa don:</label><br>
+                <input type="text" id="fname" name="ngayTao" value="@HDBanHang.ngayTaoHoaDon"><br>
+                <label for="lname"> Tong So Luong:</label>
+                @HDBanHang.tongSoLuong
+                <br>
+                <input type="submit" value="Sua hoa don">
+            </form>
+        </div>
     </div>
-    </body>
+</body>
 </html>
 
-           
+
+
+

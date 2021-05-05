@@ -51,19 +51,6 @@ namespace QuanLiCuaHang.DATA_ACCESS_LAYER
             return listMatHang;
         }
 
-        public static MATHANG KhoiTaoMatHang(String chuoiMatHang)
-        {
-            MATHANG MatHang;
-            String[] s = chuoiMatHang.Split(',');
-            MatHang.MaMatHang = s[0].Trim();
-            MatHang.TenHang = s[1].Trim();
-            MatHang.HanDung = s[2].Trim();
-            MatHang.CongTySanXuat = s[3].Trim();
-            MatHang.NamSanxuat = int.Parse(s[4].Trim());
-            MatHang.LoaiHang = s[5].Trim();
-            return MatHang;
-        }
-
         public static void LuuMatHang(MATHANG matHang)
         {   
             List<MATHANG> listMatHang = DocMatHang();

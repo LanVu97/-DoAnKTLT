@@ -27,7 +27,7 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
 
             for(int i = 0; i < listHDBanHang.Count(); i++)
             {
-                if (listHDBanHang[i].maHoaDon.Contains(keyword))
+                if (listHDBanHang[i].maHoaDon.Contains(keyword) || listHDBanHang[i].ngayTaoHoaDon.Contains(keyword))
                 {
                     listKetQuaTimKiem.Add(listHDBanHang[i]);
                 }
@@ -35,7 +35,19 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
             return listKetQuaTimKiem;
         }
 
-       
+        public static HD_BANHANG TimKiemHDBanHang_MaHD(String maHoaDon)
+        {
+            List<HD_BANHANG> listHDBanHang = LT_HD_BANHANG.DocHDBanHang();
+
+            for (int i = 0; i < listHDBanHang.Count(); i++)
+            {
+                if (listHDBanHang[i].maHoaDon == maHoaDon)
+                {
+                    return listHDBanHang[i];
+                }
+            }
+            return new HD_BANHANG();
+        }
 
         public static void ThemHDBanHang(HD_BANHANG HDBanHang)
         {
