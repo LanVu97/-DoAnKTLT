@@ -11,18 +11,26 @@ namespace QuanLiCuaHang.BUSSINESS_SERVICE
     {
         public static CHITIET_HD TimHoaDon(string maMH, List<CHITIET_HD> listChiTietHoaDon)
         {
-            int maMatHang = int.Parse(maMH);
-            return listChiTietHoaDon[maMatHang - 1];
-        }
-        public static List<CHITIET_HD> UpdateMatHang(CHITIET_HD chiTietDonHang, List<CHITIET_HD> listChiTietHoaDon)
-        {
-            for (int i = 0; i < listChiTietHoaDon.Count(); i++)
+            
+            for(int i = 0; i < listChiTietHoaDon.Count(); i++)
             {
-                if (chiTietDonHang.matHang.MaMatHang == listChiTietHoaDon[i].matHang.MaMatHang)
+                if(listChiTietHoaDon[i].matHang.MaMatHang == maMH)
+                {
+                    return listChiTietHoaDon[i];
+                }
+            }
+            return new CHITIET_HD();
+        }
+        public static List<CHITIET_HD> UpdateMatHang(CHITIET_HD chiTietDonHang, List<CHITIET_HD> listChiTietHoaDon, String maMatHangCu)
+        { 
+            for(int i = 0; i < listChiTietHoaDon.Count(); i++)
+            {
+                if(listChiTietHoaDon[i].matHang.MaMatHang == maMatHangCu)
                 {
                     listChiTietHoaDon[i] = chiTietDonHang;
                 }
             }
+            
             return listChiTietHoaDon;
         }
         public static List<CHITIET_HD> XoaMatHang(CHITIET_HD chiTietDonHang, List<CHITIET_HD> listChiTietHoaDon)

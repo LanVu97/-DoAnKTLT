@@ -2,7 +2,7 @@
 @using QuanLiCuaHang.BUSSINESS_SERVICE;
 @{
     Layout = null;
-    List<LOAI_HANG> LoaiHang = XL_LOAI_HANG.DocLoaiHang();
+    List<MATHANG> listMatHang = XL_MATHANG.DocMatHang();
     String maMatHang = Request["maMatHang"];
     String maHD = Request["maHD"];
     HOADON HDBanHang = XL_HD_BANHANG.TimKiemHDBanHang_MaHD(maHD);
@@ -14,18 +14,14 @@
     }
     CHITIET_HD matHang = XL_CHITIET_HD.TimHoaDon(maMatHang, listChiTietHoaDon);
     CHITIET_HD chiTietDonHang;
-
+    
     if (IsPost)
     {
-        chiTietDonHang.matHang.MaMatHang = maMatHang;
-        chiTietDonHang.matHang.TenHang = Request["tenMH"];
-        chiTietDonHang.matHang.HanDung = Request["hanDung"];
-        chiTietDonHang.matHang.CongTySanXuat = Request["congTySanXuat"];
-        chiTietDonHang.matHang.NamSanxuat = int.Parse(Request["namSX"]);
-        chiTietDonHang.matHang.LoaiHang = Request["LoaiHang"];
+        String maMatHangUpdate = Request["maMH"];
+        chiTietDonHang.matHang = XL_MATHANG.TimKiemMatHang_MaMH(maMatHangUpdate);
         chiTietDonHang.soLuong = int.Parse(Request["soLuong"]);
 
-        listChiTietHoaDon = XL_CHITIET_HD.UpdateMatHang(chiTietDonHang, listChiTietHoaDon);
+        listChiTietHoaDon = XL_CHITIET_HD.UpdateMatHang(chiTietDonHang, listChiTietHoaDon, maMatHang);
         Session["listMatHangUpdate"] = listChiTietHoaDon;
         Response.Redirect("~/UI/HOADON_BANHANG/MH_SUA_HD_BANHANG.cshtml?maHoaDon=" + maHD);
     }
@@ -60,24 +56,14 @@
     <div>
         <form action="~/UI/CHITIET_HDBH/MH_SUA_CHITIET_HDBH.cshtml?maMatHang=@maMatHang&maHD=@maHD" method="post">
 
-            <label for="lname">Ten Hang:</label><br>
-            <input type="text" id="lname" name="tenMH" value="@matHang.matHang.TenHang"><br><br>
-            <label for="fname">Han Dung:</label><br>
-            <input type="text" id="fname" name="hanDung" value="@matHang.matHang.HanDung"><br>
-            <label for="lname">Cong Ty San Xuat:</label><br>
-            <input type="text" id="lname" name="congTySanXuat" value="@matHang.matHang.CongTySanXuat"><br><br>
-            <label for="fname">Nam San Xuat:</label><br>
-            <input type="text" id="fname" name="namSX" value="@matHang.matHang.NamSanxuat"><br>
-            <label for="lname">Loai Hang:</label><br>
-
-            <select name="LoaiHang" >
-                <option selected="selected"> @matHang.matHang.LoaiHang</option>
-                @for (int i = 0; i < LoaiHang.Count(); i++)
+            <select name="maMH">
+                <option value="@maMatHang" selected>@maMatHang - @matHang.matHang.TenHang</option>
+                @for (int i = 0; i < listMatHang.Count(); i++)
                 {
-                    if (@LoaiHang[i].TenLoaiHang != @matHang.matHang.LoaiHang)
+                    if (listMatHang[i].MaMatHang != maMatHang)
                     {
-                    <option value="@LoaiHang[i].TenLoaiHang">@LoaiHang[i].TenLoaiHang</option>
-                }
+                        <option value="@listMatHang[i].MaMatHang">@listMatHang[i].MaMatHang - @listMatHang[i].TenHang</option>
+                    }
 
                 }
 

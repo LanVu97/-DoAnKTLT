@@ -76,6 +76,7 @@
             <h2>Chi tiết hóa đơn bán hàng </h2>
             <table>
                 <tr>
+                    <th>STT</th>
                     <th>Ma Mat Hang</th>
                     <th>Ten Hang</th>
                     <th>Han Dung</th>
@@ -89,6 +90,7 @@
                 @for (int i = 0; i < listChiTietHoaDon.Count(); i++)
                 {
                     <tr>
+                        <th>@(@i + 1) </th>
                         <th>@listChiTietHoaDon[i].matHang.MaMatHang</th>
                         <th>@listChiTietHoaDon[i].matHang.TenHang</th>
                         <th>@listChiTietHoaDon[i].matHang.HanDung</th>

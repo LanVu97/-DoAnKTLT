@@ -98,6 +98,7 @@
     <Compile Include="BUSSINESS_SERVICE\XL_HD_BANHANG.cs" />
     <Compile Include="BUSSINESS_SERVICE\XL_LOAI_HANG.cs" />
     <Compile Include="BUSSINESS_SERVICE\XL_MATHANG.cs" />
+    <Compile Include="BUSSINESS_SERVICE\XL_THONGKE_HANGTON.cs" />
     <Compile Include="DATA_ACCESS_LAYER\LT_HD_NHAPHANG.cs" />
     <Compile Include="DATA_ACCESS_LAYER\LT_HD_BANHANG.cs" />
     <Compile Include="DATA_ACCESS_LAYER\LT_LOAI_HANG.cs" />
@@ -135,6 +136,8 @@
     <Content Include="UI\CHITIET_HD_NHAPHANG\MH_THEM_CHITIET_HD_NHAPHANG.cshtml" />
     <Content Include="UI\CHITIET_HD_NHAPHANG\MH_XOA_CHITIET_HD_NHAPHANG.cshtml" />
     <Content Include="UI\HOADON_NHAPHANG\MH_SUA_HD_NHAPHANG.cshtml" />
+    <Content Include="UI\MH_THONGKE_HANGTON_THELOAI.cshtml" />
+    <Content Include="UI\MH_THONGKE_HANGTON_HANDUNG.cshtml" />
     <None Include="Web.Debug.config">
       <DependentUpon>Web.config</DependentUpon>
     </None>

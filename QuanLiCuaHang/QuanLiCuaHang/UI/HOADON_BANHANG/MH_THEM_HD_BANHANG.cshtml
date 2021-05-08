@@ -78,6 +78,7 @@
             {
                 <table>
                     <tr>
+                        <th>STT</th>
                         <th>Ma Mat Hang</th>
                         <th>Ten Hang</th>
                         <th>Han Dung</th>
@@ -90,6 +91,7 @@
                     @for (int i = 0; i < listChiTietHoaDon.Count(); i++)
                     {
                         <tr>
+                            <th>@(@i + 1)</th>
                             <th>@listChiTietHoaDon[i].matHang.MaMatHang</th>
                             <th>@listChiTietHoaDon[i].matHang.TenHang</th>
                             <th>@listChiTietHoaDon[i].matHang.HanDung</th>
@@ -107,7 +109,7 @@
             <form action="~/UI/HOADON_BANHANG/MH_THEM_HD_BANHANG.cshtml" method="post">
                 <br> <br> <br> <br>
                 <label for="fname">Ngay tao hoa don:</label><br>
-                <input type="text" id="fname" name="ngayTao"><br>
+                <input type="text" id="fname" name="ngayTao" placeholder="01/01/2021"><br>
                 <label for="lname"> Tong So Luong:</label>
                 @tongSoLuong
                 <br>

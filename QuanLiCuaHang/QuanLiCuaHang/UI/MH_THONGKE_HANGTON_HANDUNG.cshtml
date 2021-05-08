@@ -1,0 +1,99 @@
+﻿@using QuanLiCuaHang.ENTITIES;
+@using QuanLiCuaHang.BUSSINESS_SERVICE;
+
+@{ 
+    Layout = null;
+    String keyword = string.Empty;
+   
+    
+    List<CHITIET_HD> ListHangTon = null;
+   
+    if (IsPost)
+    {
+        
+        ListHangTon = XL_THONGKE_HANGTON.TimKiemHangTonDaHetHan();
+    }
+
+}
+
+<!DOCTYPE html>
+
+<html>
+<head>
+    <meta name="viewport" content="width=device-width" />
+    <title>Quản Lí Cửa Hàng </title>
+    <style>
+        table {
+            font-family: arial, sans-serif;
+            border-collapse: collapse;
+            width: 80%;
+        }
+
+        td, th {
+            border: 1px solid #dddddd;
+            text-align: left;
+            padding: 8px;
+        }
+
+        tr:nth-child(even) {
+            background-color: #dddddd;
+        }
+    </style>
+</head>
+<body>
+    <nav>
+        <a href="~/UI/MATHANG/MH_MATHANG.cshtml">Quản Lí các Mặt hàng</a> |
+        <a href="~/UI/LOAIHANG/MH_LOAIHANG.cshtml">Quản Lí các Loại hàng</a>|
+        <a href="~/UI/HOADON_BANHANG/MH_HD_BANHANG.cshtml">Quản Lí các Hóa Đơn Bán Hàng</a> |
+        <a href="~/UI/HOADON_NHAPHANG/MH_HD_NHAPHANG.cshtml">Quản Lí các Hóa Đơn Nhập Hàng</a>|
+        <a href="~/UI/MH_THONGKE_HANGTON_THELOAI.cshtml">Thống Kê Hàng Tồn Kho Theo Thể Loại</a>|
+        <a href="~/UI/MH_THONGKE_HANGTON_HANDUNG.cshtml">Thống Kê Hàng Tồn Kho Hết Hạn</a><br>
+    </nav>
+
+    <div>
+        <h1> Thống Kê Hàng Tồn Đã Hết Hạn Dùng  </h1>
+            
+        <form action="~/UI/MH_THONGKE_HANGTON_HANDUNG.cshtml" method="post">
+            
+            <br><br>
+            <input type="submit" value="Thống Kê">
+            <br>
+        </form>
+
+        @if (ListHangTon != null)
+        {
+            <table>
+                <tr>
+                    <th>Ma Mat Hang</th>
+                    <th>Ten Hang</th>
+                    <th>Han Dung</th>
+                    <th>Cong Ty San Xuat</th>
+                    <th>Nam San Xuat</th>
+                    <th>Loai Hang</th>
+                    <th>Số Lượng</th>
+                 </tr>
+
+                @for (int i = 0; i < ListHangTon.Count(); i++)
+                {
+                    
+                        <tr>
+                            <th>@ListHangTon[i].matHang.MaMatHang</th>
+                            <th>@ListHangTon[i].matHang.TenHang</th>
+                            <th>@ListHangTon[i].matHang.HanDung</th>
+                            <th>@ListHangTon[i].matHang.CongTySanXuat</th>
+                            <th>@ListHangTon[i].matHang.NamSanxuat</th>
+                            <th>@ListHangTon[i].matHang.LoaiHang</th>
+                            <th>@ListHangTon[i].soLuong</th>
+                        </tr>
+                    
+
+                }
+
+            </table>
+        }
+     </div>
+</body>
+</html>
+
+
+            
